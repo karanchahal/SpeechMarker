@@ -8,6 +8,18 @@ class  Window(QtGui.QMainWindow):   # Inheriting
         self.setGeometry(50,50,500,300)
         self.setWindowTitle("PyQT")
         self.setWindowIcon(QtGui.QIcon('icons/icon.png'))
+
+        extractAction = QtGui.QAction("&Get to the chopper!!",self)
+        extractAction.setShortcut("Ctrl+Q")
+        extractAction.setStatusTip("Leave the App")
+        extractAction.triggered.connect(self.close_application)
+
+        self.statusBar()
+
+        mainMenu = self.menuBar();
+        fileMenu = mainMenu.addMenu('&File')
+        fileMenu.addAction(extractAction)
+
         self.home()
 
     def home(self):
