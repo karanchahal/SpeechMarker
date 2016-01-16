@@ -16,10 +16,20 @@ class  Window(QtGui.QMainWindow):   # Inheriting
 
         self.statusBar()
 
+        '''File Picker'''
+        filePicker = QtGui.QAction("&Pick a File",self)
+        filePicker.setShortcut("Ctrl+F")
+        filePicker.setStatusTip("What do you think?")
+        filePicker.triggered.connect(self.pickFile)
+
+
         ''' Sets menu bar and adds action to it '''
         mainMenu = self.menuBar();
         fileMenu = mainMenu.addMenu('&File')
         fileMenu.addAction(extractAction)
+
+        filez = mainMenu.addMenu('&FilePicker')
+        filez.addAction(filePicker)
 
         self.home()
 
@@ -44,10 +54,9 @@ class  Window(QtGui.QMainWindow):   # Inheriting
         '''FONTS'''
 
         fontChoice = QtGui.QAction(QtGui.QIcon('icons/icon.png'),'Flee the Scene',self)
-        fontChoice.triggered.connect(self._fontChoice)
+        fontChoice.triggered.connect(self.fontChoices)
         self.toolBar = self.addToolBar("Font")
         self.toolBar.addAction(fontChoice)
-
 
         ''' Adding check box Functionality '''
 
@@ -73,7 +82,7 @@ class  Window(QtGui.QMainWindow):   # Inheriting
         comboBox.addItem("motif")
         comboBox.addItem("Windows")
         comboBox.addItem("cde")
-        comboBox.addItem("PLastique")
+        comboBox.addItem("Plastique")
         comboBox.addItem("Cleanlooks")
         comboBox.addItem("windowsvista")
 
@@ -84,7 +93,12 @@ class  Window(QtGui.QMainWindow):   # Inheriting
 
         self.show()
 
-    def _fontChoice(self):
+    def pickFile(self):
+        name = QtGui.QFileDialog.getOpenFileName(self,"Open File")
+        file = open(name,'r')
+
+
+    def fontChoices(self):
         font,valid = QtGui.QFontDialog.getFont()
         if valid :
             self.styleChoice.setFont(font)
