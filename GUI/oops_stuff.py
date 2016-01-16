@@ -40,7 +40,20 @@ class  Window(QtGui.QMainWindow):   # Inheriting
         self.toolBar = self.addToolBar("Extraction")
         self.toolBar.addAction(extractAction)
 
+        '''Adding check box Functionality'''
+
+        checkBox = QtGui.QCheckBox('Enlarge Window',self)
+        checkBox.toggle()
+        checkBox.stateChanged.connect(self.enlargeWindow)
+        checkBox.move(100,25)
+
         self.show()
+
+    def enlargeWindow(self,state):
+        if state == QtCore.Qt.Checked:
+            self.setGeometry(50,50,1000,600)
+        else:
+            self.setGeometry(50,50,500,300)
 
     def close_application(self):
         '''Adds the Pop Up message BOx Functionality'''
@@ -53,7 +66,10 @@ class  Window(QtGui.QMainWindow):   # Inheriting
         else:
             pass
 
-        # End    
+        # End
+
+
+
 
 def run():
     app = QtGui.QApplication(sys.argv)
