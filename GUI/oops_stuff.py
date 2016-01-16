@@ -38,8 +38,14 @@ class  Window(QtGui.QMainWindow):   # Inheriting
         self.show()
 
     def close_application(self):
-        print("Customised exit")
-        sys.exit()
+        choice = QtGui.QMessageBox.question(self,'Extract!',
+                                            "Get into the chopper?",
+                                            QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
+        if(choice == QtGui.QMessageBox.Yes):
+            print "Extracting Now.."
+            sys.exit()
+        else:
+            pass
 
 def run():
     app = QtGui.QApplication(sys.argv)
