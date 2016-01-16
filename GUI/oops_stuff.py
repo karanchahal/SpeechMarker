@@ -31,6 +31,7 @@ class  Window(QtGui.QMainWindow):   # Inheriting
         btn.resize(btn.sizeHint()) # or btn.minimumSizeHint()
         btn.move(100,100)
 
+        '''TOOLBAR'''
 
         ''' Connects the Action to the yet to be done toolbar '''
         extractAction = QtGui.QAction(QtGui.QIcon('icons/icon.png'),'Flee the Scene',self)
@@ -39,6 +40,14 @@ class  Window(QtGui.QMainWindow):   # Inheriting
         ''' Adds toolbar and the action '''
         self.toolBar = self.addToolBar("Extraction")
         self.toolBar.addAction(extractAction)
+
+        '''FONTS'''
+
+        fontChoice = QtGui.QAction(QtGui.QIcon('icons/icon.png'),'Flee the Scene',self)
+        fontChoice.triggered.connect(self._fontChoice)
+        self.toolBar = self.addToolBar("Font")
+        self.toolBar.addAction(fontChoice)
+
 
         ''' Adding check box Functionality '''
 
@@ -74,6 +83,13 @@ class  Window(QtGui.QMainWindow):   # Inheriting
 
 
         self.show()
+
+    def _fontChoice(self):
+        font,valid = QtGui.QFontDialog.getFont()
+        if valid :
+            self.styleChoice.setFont(font)
+
+
 
     def styleChoices(self,text):
         self.styleChoice.setText(text)
