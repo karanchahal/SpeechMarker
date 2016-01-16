@@ -55,8 +55,29 @@ class  Window(QtGui.QMainWindow):   # Inheriting
         self.btn.move(200,120)
         self.btn.clicked.connect(self.download);
 
+        '''Drop Down button'''
+        print self.style().objectName()
+        self.styleChoice = QtGui.QLabel("Windows Vista",self);
+
+        comboBox = QtGui.QComboBox(self)
+
+        comboBox.addItem("motif")
+        comboBox.addItem("Windows")
+        comboBox.addItem("cde")
+        comboBox.addItem("PLastique")
+        comboBox.addItem("Cleanlooks")
+        comboBox.addItem("windowsvista")
+
+        comboBox.move(50,250)
+        self.styleChoice.move(50,150)
+        comboBox.activated[str].connect(self.styleChoices)
+
 
         self.show()
+
+    def styleChoices(self,text):
+        self.styleChoice.setText(text)
+        QtGui.QApplication.setStyle(QtGui.QStyleFactory.create(text))
 
     def download(self):
         self.completed = 0;
