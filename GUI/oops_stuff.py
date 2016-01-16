@@ -29,6 +29,12 @@ class  Window(QtGui.QMainWindow):   # Inheriting
         btn.resize(btn.sizeHint()) # or btn.minimumSizeHint()
         btn.move(100,100)
 
+        extractAction = QtGui.QAction(QtGui.QIcon('icons/icon.png'),'Flee the Scene',self)
+        extractAction.triggered.connect(self.close_application)
+
+        self.toolBar = self.addToolBar("Extraction")
+        self.toolBar.addAction(extractAction)
+
         self.show()
 
     def close_application(self):
